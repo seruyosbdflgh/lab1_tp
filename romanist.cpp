@@ -4,15 +4,15 @@
 
 using namespace std;
 
-Romanist::Romanist() : name(""), years(""), books(""), bio("") {cout << "Вызван конструктор без параметров для Romanist\n";}
+Romanist::Romanist() : name(""), years(""), books(""), bio("") {cout << "Default constructor called for Romanist\n";}
 
 Romanist::Romanist(const string& n, const string& y, const string& b, const string& bio)
-    : name(n), years(y), books(b), bio(bio) {cout << "Вызван конструктор с параметрами для Romanist\n";}
+    : name(n), years(y), books(b), bio(bio) {cout << "Parameterized constructor called for Romanist\n";}
 
 Romanist::Romanist(const Romanist& other)
-    : name(other.name), years(other.years), books(other.books), bio(other.bio) {cout << "Вызван конструктор копирования для Romanist\n";}
+    : name(other.name), years(other.years), books(other.books), bio(other.bio) {cout << "Copy constructor called for Romanist\n";}
 
-Romanist::~Romanist() {cout << "Вызван деструктор для Romanist\n";}
+Romanist::~Romanist() {cout << "Destructor called for Romanist\n";}
 
 void Romanist::set_name(string n) {
     name = n;

@@ -2,24 +2,24 @@
 #include <stdexcept>
 
 Keeper::Keeper() : head(nullptr), tail(nullptr), count(0) {
-    cout << "Вызван конструктор без параметров для Keeper\n";
+    cout << "Default constructor called for Keeper\n";
 }
 
 Keeper::Keeper(El* head, El* tail, int count) : head(head), tail(tail), count(count) {
-    cout << "Вызван конструктор с параметрами для Keeper\n";
+    cout << "Parameterized constructor called for Keeper\n";
 }
 
 Keeper::Keeper(Keeper& other) : head(other.head), tail(other.tail), count(other.count) {
-    cout << "Вызван конструктор копирования для Keeper\n";
+    cout << "Copy constructor called for Keeper\n";
 }
 
 Keeper::~Keeper() {
-    cout << "Вызван деструктор для Keeper класса\n";
+    cout << "Destructor called for Keeper class\n";
     clear();
 }
 
 void Keeper::delete_head() {
-    if (!head) throw std::runtime_error("Попытка удалить элемент из пустого контейнера");
+    if (!head) throw std::runtime_error("Attempt to delete element from empty container");
     El* temp = head;
     head = head->next;
     delete temp->value;
@@ -43,7 +43,7 @@ void Keeper::print_keeper() {
     El* temp = head;
 
     if (count == 0) {
-        cout << "Данных нет" << endl;
+        cout << "No data available" << endl;
         return;
     }
     int i = 0;
@@ -52,7 +52,7 @@ void Keeper::print_keeper() {
         if (temp->value) {
             temp->value->display_obj();
         } else {
-            cout << "Данных нет";
+            cout << "No data available";
         }
         cout << " " << endl;
         temp = temp->next;
@@ -62,7 +62,7 @@ void Keeper::print_keeper() {
 
 Keeper& Keeper::delete_el(int n) {
     if (n < 0 || n >= count) {
-        throw std::out_of_range("Неправильный индекс элемента");
+        throw std::out_of_range("Invalid element index");
     }
 
     El* temp = head;
@@ -93,7 +93,7 @@ Keeper& Keeper::delete_el(int n) {
 
 void Keeper::add(Base* obj, int index) {
     if (index < 0 || index > count) {
-        throw std::out_of_range("Неверный индекс для добавления элемента");
+        throw std::out_of_range("Invalid index for adding element");
     }
 
     El* newElement = new El;
@@ -118,12 +118,12 @@ void Keeper::add(Base* obj, int index) {
         }
     }
     count++;
-    cout << "Объект добавлен.\n";
+    cout << "Object added.\n";
 }
 
 Keeper& Keeper::edit_el(int n) {
     if (n < 1 || n > count) {
-        throw std::out_of_range("Неправильный индекс элемента");
+        throw std::out_of_range("Invalid element index");
     }
     El* temp = head;
     for (int i = 1; i < n; i++) {
@@ -132,7 +132,7 @@ Keeper& Keeper::edit_el(int n) {
     if (temp->value) {
         temp->value->change_info();
     } else {
-        throw std::runtime_error("Нет данных для редактирования");
+        throw std::runtime_error("No data available for editing");
     }
     return *this;
 }
@@ -142,7 +142,7 @@ Keeper& Keeper::operator!() {
     if (index > 0) {
         this->delete_el(index - 1);
     } else {
-        cout << "Нечего удалять. Список пуст." << endl;
+        cout << "Nothing to delete. The list is empty." << endl;
     }
     return *this;
 }
@@ -151,7 +151,7 @@ Keeper& operator++(Keeper& other, int) {
     if (other.tail && other.tail->value) {
         other.tail->value->change_info();
     } else {
-        throw std::runtime_error("Нет элементов для изменения.");
+        throw std::runtime_error("No elements available for modification.");
     }
     return other;
 }
@@ -159,7 +159,7 @@ Keeper& operator++(Keeper& other, int) {
 void Keeper::save_to_file(const string& filename) {
     ofstream out(filename);
     if (!out) {
-        throw std::runtime_error("Ошибка открытия файла для записи");
+        throw std::runtime_error("Error opening file for writing");
     }
     El* current = head;
     while (current != nullptr) {
@@ -172,7 +172,7 @@ void Keeper::save_to_file(const string& filename) {
 void Keeper::load_from_file(const string& filename) {
     ifstream in(filename);
     if (!in) {
-        throw std::runtime_error("Ошибка открытия файла для загрузки");
+        throw std::runtime_error("Error opening file for loading");
     }
     string tag;
     while (getline(in, tag)) {
@@ -188,12 +188,12 @@ void Keeper::load_from_file(const string& filename) {
             } else if (tag == "Fantast") {
                 object = new Fantast();
             } else {
-                throw std::runtime_error("Неизвестный тип объекта: " + tag);
+                throw std::runtime_error("Unknown object type: " + tag);
             }
             object->load_from_file(in);
             this->add(object, this->get_count());
         } catch (const std::exception& e) {
-            cerr << "Ошибка при добавлении объекта: " << e.what() << endl;
+            cerr << "Error adding object: " << e.what() << endl;
             delete object;
         }
     }

@@ -4,13 +4,13 @@
 
 using namespace std;
 
-Poet::Poet() : name(""), years(""), poems("") {cout << "Вызван конструктор без параметров для Poet\n";}
+Poet::Poet() : name(""), years(""), poems("") {cout << "Default constructor called for Poet\n";}
 
-Poet::Poet(const string& n, const string& y, const string& p) : name(n), years(y), poems(p) {cout << "Вызван конструктор с параметрами для Poet\n";}
+Poet::Poet(const string& n, const string& y, const string& p) : name(n), years(y), poems(p) {cout << "Parameterized constructor called for Poet\n";}
 
-Poet::Poet(const Poet& other) : name(other.name), years(other.years), poems(other.poems) {cout << "Вызван конструктор копирования для Poet\n";}
+Poet::Poet(const Poet& other) : name(other.name), years(other.years), poems(other.poems) {cout << "Copy constructor called for Poet\n";}
 
-Poet::~Poet() {cout << "Вызван деструктор для Poet\n";}
+Poet::~Poet() {cout << "Destructor called for Poet\n";}
 
 void Poet::set_name(string n) {
     name = n;

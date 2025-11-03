@@ -4,15 +4,15 @@
 
 using namespace std;
 
-Fantast::Fantast() : name(""), years(""), books(""), movies_by_books("") {cout << "Вызван конструктор без параметров для Fantast\n";}
+Fantast::Fantast() : name(""), years(""), books(""), movies_by_books("") {cout << "Default constructor called for Fantast\n";}
 
 Fantast::Fantast(const string& n, const string& y, const string& b, const string& m)
-    : name(n), years(y), books(b), movies_by_books(m) {cout << "Вызван конструктор с параметрами для Fantast\n";}
+    : name(n), years(y), books(b), movies_by_books(m) {cout << "Parameterized constructor called for Fantast\n";}
 
 Fantast::Fantast(const Fantast& other)
-    : name(other.name), years(other.years), books(other.books), movies_by_books(other.movies_by_books) {cout << "Вызван конструктор копирования для Fantast\n";}
+    : name(other.name), years(other.years), books(other.books), movies_by_books(other.movies_by_books) {cout << "Copy constructor called for Fantast\n";}
 
-Fantast::~Fantast() {cout << "Вызван деструктор для Fantast\n";}
+Fantast::~Fantast() {cout << "Destructor called for Fantast\n";}
 
 void Fantast::set_name(string n) {
     name = n;
