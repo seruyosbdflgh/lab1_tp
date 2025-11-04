@@ -93,19 +93,32 @@ int main() {
                     continue;
                 }
 
-                keeper.add(obj, index - 1);
+                try {
+                    keeper.add(obj, index - 1);
+                } catch (std::out_of_range&) {
+                    cout << "Invalid index for adding" << endl;
+                    delete obj;
+                }
                 break;
             }
 
             case 2: {
                 int index = get_valid_number("Enter index to delete object: ");
-                keeper.delete_el(index + 1);
+                try {
+                    keeper.delete_el(index - 1);
+                } catch (std::out_of_range&) {
+                    cout << "Invalid index for deleting" << endl;
+                }
                 break;
             }
 
             case 3: {
                 int index = get_valid_number("Enter index to edit object: ");
-                keeper.edit_el(index);
+                try {
+                    keeper.edit_el(index);;
+                } catch (std::out_of_range&) {
+                    cout << "Invalid index for editing" << endl;
+                }
                 break;
             }
 
